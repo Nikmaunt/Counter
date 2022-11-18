@@ -5,6 +5,7 @@ import {Counter} from "./Components/Counter";
 import {json} from "stream/consumers";
 import Button from "./Components/Button";
 import Input from "./Components/Input";
+import {Settings} from "./Components/Settings";
 
 export let maxValue = 10
 export let startValue = 5
@@ -49,10 +50,11 @@ function App() {
     //     }
     // },[])
 
-
     useEffect(()=> {
-        localStorage.setItem('counterValue',JSON.stringify(counter),)
-    },[counter])
+        localStorage.setItem('counterValue',JSON.stringify(counter))
+    },[counter]
+
+    )
     useEffect(()=> {
         localStorage.setItem('maxValue',JSON.stringify(maxValue))
     },[counter])
@@ -71,7 +73,6 @@ function App() {
             setCounter(startValue)
         }
     }
-
     // const setToLocalStorageHandler = () => {
     //     localStorage.setItem('counterValue',JSON.stringify(counter))
     // }
@@ -84,7 +85,7 @@ function App() {
     //     }
     // }
     const incDisabled = counter === maxValue || maxValue <= startValue || startValue < 0 ? isDisabled : false
-    const resetDisabled = counter === startValue ? isDisabled : false
+    // const resetDisabled = counter === startValue ? isDisabled : false
     const Disabled = maxValue <= startValue || startValue < 0  ? isDisabled  : false
 
     const addValue = (startValue:number, maxValue:number ) =>{
@@ -99,13 +100,27 @@ function App() {
 
     return (
         <div className='app'>
-             <Counter counter={counter}/>
-             <Counter counter={counter}/>
-             <Button name={'Inc'} callback={inc} disabled={incDisabled}/>
-             <Button name={'Reset'} callback={reset} disabled={Disabled}/>
-             <Button name={'Set'} callback={setNewCounter} disabled={Disabled}/>
-             <Input name={'max value'}   setValue={setMaxValue} value={maxValue} />
-             <Input name={'start value'} setValue={setStartValue} value={startValue}/>
+             <Counter maxValue={maxValue}
+                      counter={counter}
+                      buttonNameInc = {'Inc'}
+                      buttonNameReset = {'Reset'}
+                      callbackInc={inc}
+                      callbackReset={reset}
+                      incDisabled={incDisabled}
+                      resetDisabled={Disabled}
+             />
+                  <Settings nameMax={'max value'}
+                            nameStart={'start value'} setStartValue={setStartValue} setMaxValue={setMaxValue}
+                            maxValue={maxValue}
+                            startValue={startValue}
+                            buttonName={'Set'}
+                            callback={setNewCounter}
+                            disabled={Disabled} />
+             {/*<Button name={'Inc'} callback={inc} disabled={incDisabled}/>*/}
+             {/*<Button name={'Reset'} callback={reset} disabled={Disabled}/>*/}
+             {/*<Button name={'Set'} callback={setNewCounter} disabled={Disabled}/>*/}
+             {/*<Input name={'max value'}   setValue={setMaxValue} value={maxValue} />*/}
+             {/*<Input name={'start value'} setValue={setStartValue} value={startValue}/>*/}
         </div>
     );
 }
