@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyledButton} from "./Button.styles";
-
+import Button from '@mui/material/Button';
 
 type ButtonType = {
     name: string
@@ -8,12 +8,13 @@ type ButtonType = {
     disabled:boolean
 }
 
-export const Button = (props:ButtonType) => {
+export const Buttons = (props:ButtonType) => {
     const onClickHandler = () => {props.callback()}
 
     return (
         <div>
-           <StyledButton onClick={onClickHandler} disabled={props.disabled}>{props.name}</StyledButton>
+            <Button size="small" onClick={onClickHandler} disabled={props.disabled} variant="contained">{props.name}</Button>
+           {/*<StyledButton onClick={onClickHandler} disabled={props.disabled}>{props.name}</StyledButton>*/}
             {/*<button onClick={props.setToLocalStorageHandler}> setToLocalStorage </button>*/}
             {/*<button onClick={props.getFromLocalStorageHandler}> getFromLocalStorage </button>*/}
          </div>

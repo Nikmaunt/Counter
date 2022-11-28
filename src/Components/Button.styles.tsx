@@ -6,8 +6,8 @@ import styled from "styled-components";
   width: 100px;
   height: 30px;
   align-items: center;
-  margin: auto;
-  float: left;
+  //margin-top: 15px;
+  //float: left;
   
  
   
