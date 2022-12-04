@@ -6,52 +6,47 @@ import {StyledSettings} from "./Settings.styles";
 import Grid from '@mui/material/Grid';
 
 
-
 type SettingsType = {
     nameMax: string
     nameStart: string
-    buttonName:string
-    callback:()=> void
-    setStartValue:(value:number)=> void
-    setMaxValue:(value:number)=> void
+    buttonName: string
+    callback: () => void
+    setStartValue: (value: number) => void
+    setMaxValue: (value: number) => void
     disabled: boolean
-    incDisabled:boolean
-    maxValue:number
-    startValue:number
-    counter:(value:number)=> void
-
-    // setToLocalStorageHandler:() => void
-    // getFromLocalStorageHandler: () => void
+    incDisabled: boolean
+    maxValue: number
+    startValue: number
+    counter: (value: number) => void
 }
 
-export function Settings (props: SettingsType) {
+export function Settings(props: SettingsType) {
 
-    return    <Grid
+    return <Grid
         container
         direction="column"
         justifyContent="center"
         alignItems="stretch"
     >
-    <Input  name={props.nameMax}
+        <Input name={props.nameMax}
                setValue={props.setMaxValue}
                value={props.maxValue}
-                  counter={props.counter}
-                disabled={props.disabled}
+               counter={props.counter}
+               disabled={props.disabled}
 
         />
         <Input name={props.nameStart}
                setValue={props.setStartValue}
-               disabled={props.disabled}
+               disabled={  props.disabled }
                value={props.startValue}
                counter={props.counter}
         />
- <Grid container
-       direction="row"
-       justifyContent="space-evenly"
-
-       marginTop="10px">
-        <Buttons name={'Set'} callback={props.callback} disabled={props.disabled}/>
- </Grid>
+        <Grid container
+              direction="row"
+              justifyContent="space-evenly"
+              marginTop="10px">
+            <Buttons name={'Set'} callback={props.callback} disabled={props.disabled}/>
+        </Grid>
     </Grid>
 }
 

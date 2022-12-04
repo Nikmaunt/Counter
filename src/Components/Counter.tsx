@@ -1,6 +1,6 @@
 import {StyledCounter} from "./Counter.styles";
 import Button, {Buttons} from "./Button";
-import React from "react";
+import React, {useState} from "react";
 import Grid from '@mui/material/Grid';
 
 import {StyledTextField} from "./Input";
@@ -16,19 +16,19 @@ type CounterType = {
     callbackReset: () => void
     incDisabled: boolean
     resetDisabled: boolean
-
-    // setToLocalStorageHandler:() => void
-    // getFromLocalStorageHandler: () => void
+    isTouched: boolean
 }
 
+const MESSAGE = 'Enter values and press set'
+
 export function Counter(props: CounterType) {
-    const counterDisplay = props.startValue >= props.maxValue || props.maxValue <= props.startValue || props.startValue < 0 ? 'Incorrect value' : props.counter
 
-    return  <Grid
 
-    >
+    const counterDisplay = props.startValue >= props.maxValue || props.maxValue <= props.startValue || props.startValue < 0 || props.resetDisabled ?   'Incorrect value' : props.counter
+
+    return  <Grid>
         <StyledTextField id="Outlined"
-                   label={props.resetDisabled ? "Incorrect value" : props.resetDisabled ? "Err" : counterDisplay}
+                   label={props.isTouched ? MESSAGE : counterDisplay}
                    variant="standard"
                    style={{ border:"1.5px solid #61dbfb ", paddingTop: 39, backgroundColor: "white", textAlign:"center"}}
                    error={props.incDisabled}
@@ -41,9 +41,9 @@ export function Counter(props: CounterType) {
         <Grid
             container
             direction="row"
-            rowSpacing={1}
+            rowSpacing={5}
             justifyContent="space-evenly"
-            alignItems="baseline"
+            alignItems="stretch"
             marginTop="10px"
             marginLeft="43x"
         >

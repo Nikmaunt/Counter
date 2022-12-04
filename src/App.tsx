@@ -8,16 +8,19 @@ import Input from "./Components/Input";
 import {Settings} from "./Components/Settings";
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-// export let maxValue = 10
-// export let startValue = 5
-// export let isDisabled = true
 
 
 function App() {
 
-    const [counter, setCounter] = useState<any  >(0)
+    const [counter, setCounter] = useState<number>(0)
     const [startValue, setStartValue] = useState<number>(0)
     const [maxValue, setMaxValue] = useState<number>(0)
+    const [isTouched, setIsTouched] = useState<boolean>(false)
+
+    const startValueHandler = (value: number) => {
+        setStartValue(value)
+        setIsTouched(true)
+    }
 
     let isDisabled = true
 
@@ -39,18 +42,9 @@ function App() {
         }
     }, [])
 
-    // useEffect(()=> {
-    //     let maxValueAsString = localStorage.getItem(`maxValue`)
-    //     if (maxValueAsString )
-    //     {
-    //         let maxValue = JSON.parse(maxValueAsString)
-    //         setMaxValue(maxValue)
-    //     }
-    // },[])
-
     useEffect(() => {
             localStorage.setItem('counterValue', JSON.stringify(counter))
-        }, [counter]
+        }, []
     )
     useEffect(() => {
         localStorage.setItem('maxValue', JSON.stringify(maxValue))
@@ -60,11 +54,11 @@ function App() {
     }, [counter])
 
     function inc() {
-        if (startValue >= 0 && maxValue > startValue )
-            setCounter(counter + JSON.parse('1'))
-        if ( counter ===  'Enter values and press set') {
-            setCounter('Enter values and press set')
-        }
+        if (startValue >= 0 && maxValue > startValue)
+            setCounter(counter + 1)
+        // if (counter === 'Enter values and press set') {
+        //     setCounter('Enter values and press set')
+        // }
     }
 
     function reset() {
@@ -73,74 +67,65 @@ function App() {
         }
     }
 
-    // const setToLocalStorageHandler = () => {
-    //     localStorage.setItem('counterValue',JSON.stringify(counter))
-    // }
-    //
-    // const getFromLocalStorageHandler = () => {
-    //      let counterAsString =  localStorage.getItem('counterValue')
-    //     if (counterAsString){
-    //         let newCounter =  JSON.parse(counterAsString)
-    //         setCounter(newCounter)
-    //     }
-    // }
     const incDisabled = counter === maxValue || maxValue <= startValue || startValue < 0 ? isDisabled : false
-    // const resetDisabled = counter === startValue ? isDisabled : false
+
     const Disabled = maxValue <= startValue || startValue < 0 ? isDisabled : false
+    // const Disabled = isTouched || maxValue <= startValue || startValue < 0 ? isDisabled : false
+    // const Disabled = isTouched
 
     const addValue = (startValue: number, maxValue: number) => {
-        if (startValue >= 0 && maxValue > startValue )
+        if (startValue >= 0 && maxValue > startValue)
             setCounter(startValue)
-        // let maxValue = value
     }
     const setNewCounter = () => {
-        if (maxValue > startValue)
+        if (maxValue > startValue){
             addValue(startValue, maxValue)
-    }
+            setIsTouched(false)
+        }
 
+    }
+    console.log('toch', isTouched)
     return (
-        <div className='app' style={{textAlign:"center"}}>
-            <Container fixed >
+        <div className='app' style={{textAlign: "center", alignItems: "center"}}>
+            <Container fixed>
                 <Grid
                     container
-                    style={{backgroundColor: "#2a2c2e"}}
+                    style={{backgroundColor: "gray"}}
                     direction="row"
                     spacing={2}
                     columns={2}
                     marginTop={20}
                     justifyContent="space-between"
                 >
-                <Grid border="2px solid" borderColor='#61dbfb'  item xs={1}
-                          >
-            <Counter maxValue={maxValue}
-                     startValue={startValue}
-                     counter={counter}
-                     buttonNameInc={'Inc'}
-                     buttonNameReset={'Reset'}
-                     callbackInc={inc}
-                     callbackReset={reset}
-                     incDisabled={incDisabled}
-                     resetDisabled={Disabled}
-            />
-                </Grid>
-                <Grid item xs={1} border="2px solid" borderColor='#61dbfb'>
-            <Settings nameMax={'max value'}
-                      nameStart={'start value'}
-                      setStartValue={setStartValue}
-                      setMaxValue={setMaxValue}
-                      maxValue={maxValue}
-                      counter={setCounter}
-                      startValue={startValue}
-                      buttonName={'Set'}
-                      callback={setNewCounter}
-                      disabled={Disabled}
-                      incDisabled={incDisabled}/>
-            {/*<Button name={'Inc'} callback={inc} disabled={incDisabled}/>*/}
-            {/*<Button name={'Reset'} callback={reset} disabled={Disabled}/>*/}
-            {/*<Button name={'Set'} callback={setNewCounter} disabled={Disabled}/>*/}
-            {/*<Input name={'max value'}   setValue={setMaxValue} value={maxValue} />*/}
-            {/*<Input name={'start value'} setValue={setStartValue} value={startValue}/>*/}
-                </Grid>
+                    <Grid border="2px solid" borderColor='#61dbfb' item xs={1}
+                    >
+                        <Counter maxValue={maxValue}
+                                 startValue={startValue}
+                                 counter={counter}
+                                 // counter={isTouched ? 'text' : counter}
+                                 buttonNameInc={'Inc'}
+                                 buttonNameReset={'Reset'}
+                                 callbackInc={inc}
+                                 callbackReset={reset}
+                                 incDisabled={incDisabled}
+                                 resetDisabled={Disabled}
+                                 isTouched={isTouched}
+
+                        />
+                    </Grid>
+                    <Grid item xs={1} border="2px solid" borderColor='#61dbfb'>
+                        <Settings nameMax={'max value'}
+                                  nameStart={'start value'}
+                                  setStartValue={startValueHandler}
+                                  setMaxValue={setMaxValue}
+                                  maxValue={maxValue}
+                                  counter={setCounter}
+                                  startValue={startValue}
+                                  buttonName={'Set'}
+                                  callback={setNewCounter}
+                                  disabled={Disabled}
+                                  incDisabled={incDisabled}/>
+                    </Grid>
                 </Grid>
             </Container>
         </div>
