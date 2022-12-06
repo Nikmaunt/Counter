@@ -19,16 +19,16 @@ type CounterType = {
     isTouched: boolean
 }
 
-const MESSAGE = 'Enter values and press set'
+
 
 export function Counter(props: CounterType) {
 
+    const MESSAGE = props.startValue >= props.maxValue || props.maxValue <= props.startValue || props.startValue < 0 || props.resetDisabled ?   'Incorrect value' : 'Enter values and press set'
 
-    const counterDisplay = props.startValue >= props.maxValue || props.maxValue <= props.startValue || props.startValue < 0 || props.resetDisabled ?   'Incorrect value' : props.counter
 
     return  <Grid>
         <StyledTextField id="Outlined"
-                   label={props.isTouched ? MESSAGE : counterDisplay}
+                   label={props.isTouched ? MESSAGE : props.counter}
                    variant="standard"
                    style={{ border:"1.5px solid #61dbfb ", paddingTop: 39, backgroundColor: "white", textAlign:"center"}}
                    error={props.incDisabled}

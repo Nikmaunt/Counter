@@ -22,6 +22,11 @@ function App() {
         setIsTouched(true)
     }
 
+    const maxValueHandler = (value: number) => {
+        setMaxValue(value)
+        setIsTouched(true)
+    }
+
     let isDisabled = true
 
     useEffect(() => {
@@ -117,7 +122,7 @@ function App() {
                         <Settings nameMax={'max value'}
                                   nameStart={'start value'}
                                   setStartValue={startValueHandler}
-                                  setMaxValue={setMaxValue}
+                                  setMaxValue={maxValueHandler}
                                   maxValue={maxValue}
                                   counter={setCounter}
                                   startValue={startValue}
