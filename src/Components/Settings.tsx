@@ -2,8 +2,7 @@ import {StyledCounter} from "./Counter.styles";
 import Input from "./Input";
 import React from "react";
 import Button, {Buttons} from "./Button";
-import {StyledSettings} from "./Settings.styles";
-import Grid from '@mui/material/Grid';
+import style from "./counter.module.css";
 
 
 type SettingsType = {
@@ -17,17 +16,13 @@ type SettingsType = {
     incDisabled: boolean
     maxValue: number
     startValue: number
-    counter: (value: number) => void
+    counter: (value: any) => void
 }
 
 export function Settings(props: SettingsType) {
 
-    return <Grid
-        container
-        direction="column"
-        justifyContent="center"
-        alignItems="stretch"
-    >
+    return  <div className={style.mainBlock}>
+        <div className={style.settings} >
         <Input name={props.nameMax}
                setValue={props.setMaxValue}
                value={props.maxValue}
@@ -41,12 +36,10 @@ export function Settings(props: SettingsType) {
                value={props.startValue}
                counter={props.counter}
         />
-        <Grid container
-              direction="row"
-              justifyContent="space-evenly"
-              marginTop="10px">
+<div className={style.buttonsBlockSettings}>
             <Buttons name={'Set'} callback={props.callback} disabled={props.disabled}/>
-        </Grid>
-    </Grid>
+</div>
+        </div>
+</div>
 }
 

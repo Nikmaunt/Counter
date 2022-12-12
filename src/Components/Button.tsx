@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyledButton} from "./Button.styles";
-import Button from '@mui/material/Button';
+import style from "./counter.module.css";
+// import Button from '@mui/material/Button';
 
 type ButtonType = {
     name: string
@@ -13,11 +14,13 @@ export const Buttons = (props: ButtonType) => {
         props.callback()
     }
     return (
-        <div>
-            <Button size="small" onClick={onClickHandler} disabled={props.disabled}
-                    variant="contained">{props.name}</Button>
+
+        <div >
+            <button className={props.disabled ? style.disabled : style.buttons} onClick={onClickHandler} disabled={props.disabled}>{props.name} </button>
+            {/*<Button size="small" onClick={onClickHandler} disabled={props.disabled}*/}
+            {/*        variant="contained">{props.name}</Button>*/}
         </div>
     );
 };
 
-export default Button;
+export default Buttons;

@@ -1,8 +1,6 @@
-import {StyledCounter} from "./Counter.styles";
 import Button, {Buttons} from "./Button";
 import React, {useState} from "react";
-import Grid from '@mui/material/Grid';
-
+import style from "../Components/counter.module.css";
 import {StyledTextField} from "./Input";
 
 
@@ -20,37 +18,35 @@ type CounterType = {
 }
 
 
-
 export function Counter(props: CounterType) {
 
-    const MESSAGE = props.startValue >= props.maxValue || props.maxValue <= props.startValue || props.startValue < 0 || props.resetDisabled ?   'Incorrect value' : 'Enter values and press set'
+    const MESSAGE = props.startValue >= props.maxValue || props.maxValue <= props.startValue || props.startValue < 0 || props.resetDisabled ? 'Incorrect value' : 'Enter values and press set'
 
 
-    return  <Grid>
-        <StyledTextField id="Outlined"
-                   label={props.isTouched ? MESSAGE : props.counter}
-                   variant="standard"
-                   style={{ border:"1.5px solid #61dbfb ", paddingTop: 39, backgroundColor: "white", textAlign:"center"}}
-                   error={props.incDisabled}
-                   InputLabelProps={{shrink: false} }
-                   InputProps={{
-                       readOnly: true,
-                       disableUnderline: true
-                   }}
+    return <div className={style.mainBlock}>
+        <div   className={style.counter}>
+         <StyledTextField id="Outlined"
+                         label={props.isTouched ? MESSAGE : props.counter}
+                         variant="standard"
+                         style={{
+                             border: "1.5px solid #61dbfb ",
+                             paddingTop: 39,
+                             backgroundColor: "white",
+                             width: "99%"
+                         }}
+                         error={props.incDisabled}
+                         InputLabelProps={{shrink: false}}
+                         InputProps={{
+                             readOnly: true,
+                             disableUnderline: true
+                         }}
         />
-        <Grid
-            container
-            direction="row"
-            rowSpacing={5}
-            justifyContent="space-evenly"
-            alignItems="stretch"
-            marginTop="10px"
-            marginLeft="43x"
-        >
-            <Buttons name={props.buttonNameInc} callback={props.callbackInc} disabled={props.incDisabled}/>
-            <Buttons name={props.buttonNameReset} callback={props.callbackReset} disabled={props.resetDisabled}/>
-        </Grid>
-    </Grid>
+            <div className={style.buttonsBlockCounter}>
+        <Buttons name={props.buttonNameInc} callback={props.callbackInc} disabled={props.incDisabled} />
+        <Buttons name={props.buttonNameReset} callback={props.callbackReset} disabled={props.resetDisabled}/>
+            </div>
+        </div>
+    </div>
 
 
 }

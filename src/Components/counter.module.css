@@ -1,0 +1,76 @@
+.counterBlock {
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
+    background-color: #18212a;
+    padding:  50px 0;
+    height: 100vh;
+}
+
+.main {
+    width: 50%;
+    align-items: center;
+    background-color:#18212a;
+
+    text-align: center;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainBlock{
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonsBlockCounter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid;
+    /*align-items:flex-end;*/
+}
+
+.buttonsBlockSettings{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border: 1px solid;
+    /*align-items:flex-end;*/
+}
+
+.buttons {
+    min-width: 80px;
+    min-height: 33px;
+    border: 0;
+    border-radius: 5px;
+    background: #2e3a5b;
+    color: #fff;
+    margin-top: 10px;
+}
+
+
+.settings{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.counter{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.disabled {
+    background: black;
+    min-width: 80px;
+    min-height: 33px;
+    border: 0;
+    border-radius: 5px;
+    color: #fff;
+    margin-top: 10px;
+}
+

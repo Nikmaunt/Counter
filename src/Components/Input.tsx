@@ -35,7 +35,7 @@ export const Input = (props: InputType) => {
     return (
         <div>
             <StyledTextField id="Standard"
-                             style={{marginTop: 6, backgroundColor: "white"}}
+                             style={{marginTop: 6, backgroundColor: "white",  width: "100%"}}
                              color="info"
                              error={props.disabled}
                              size="small"
