@@ -2,30 +2,31 @@ import React, {useEffect, useReducer, useState} from 'react';
 import './App.css';
 import {Counter} from "./Components/Counter";
 import {Settings} from "./Components/Settings";
-import styleContainer from "../src/Common/container.module.css";
 import style from "../src/Components/counter.module.css";
+import {
+    addValueAC,
+    incAC, InitialStateType,
+    maxValueAC,
+    resetAC,
+    setNewCounterAC, startValueAC
+} from "./State/counter-reducers";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "./State/Store/Store";
 
-function App() {
 
-
-
-    const [counter, setCounter] = useState<number>(0)
-    // const [counter, dispatchCounter] = useReducer(counterReducer,0)
-    const [startValue, setStartValue] = useState<any>(0)
-    // const [startValue, dispatchStartValue] = useReducer<any>(settingsReducer,0)
-    const [maxValue, setMaxValue] = useState<any>(0)
-    const [isTouched, setIsTouched] = useState<any>(false)
+function AppWithRedux() {
+    let counter = useSelector<AppRootStateType, any>(state => state.counter.counter)
+    let maxValue = useSelector<AppRootStateType, number>(state => state.counter.maxValue)
+    let startValue = useSelector<AppRootStateType, number>(state => state.counter.startValue)
+    let isTouched = useSelector<AppRootStateType, boolean>(state => state.counter.isTouched)
+    const dispatch = useDispatch()
 
     const startValueHandler = (value: number) => {
-        setStartValue(value)
-        // dispatchStartValue(startValueAC(value))
-        setIsTouched(true)
-
+        dispatch(startValueAC(value))
     }
 
     const maxValueHandler = (value: number) => {
-        setMaxValue(value)
-        setIsTouched(true)
+        dispatch(maxValueAC(value))
     }
 
     let isDisabled = true
@@ -59,30 +60,26 @@ function App() {
     // }, [counter])
 
     function inc() {
-        // if (startValue >= 0 && maxValue > startValue)
-        // dispatchCounter(incAC())
-            setCounter(counter + 1)
-    }
-    function reset() {
-        setCounter(startValue)
-            // dispatchCounter(resetAC())
+        dispatch(incAC())
     }
 
-    const incDisabled = counter === maxValue || maxValue <=  startValue || startValue < 0 ? isDisabled : false
+    function reset() {
+        dispatch(resetAC())
+    }
+
+    const incDisabled = counter === maxValue || maxValue <= startValue || startValue < 0 ? isDisabled : false
 
     const Disabled = maxValue <= startValue || startValue < 0 ? isDisabled : false
 
+    // const addValue = (startValue: number, maxValue: number) => {
+    //     // // if (startValue >= 0 && maxValue > startValue)
+    //     // //     // setCounter(startValue)
+    //     // dispatch(addValueAC(startValue,maxValue))
+    // }
 
-    const addValue = (startValue: number, maxValue: number) => {
-        if (startValue >= 0 && maxValue > startValue)
-            setCounter(startValue)
-    }
     const setNewCounter = () => {
-        if (maxValue > startValue) {
-            addValue(startValue, maxValue)
-            setIsTouched(false)
-        }
-
+        dispatch(setNewCounterAC())
+        dispatch(addValueAC(startValue, maxValue))
     }
 
     return (
@@ -91,7 +88,6 @@ function App() {
                 <Counter maxValue={maxValue}
                          startValue={startValue}
                          counter={counter}
-                    // counter={isTouched ? 'text' : counter}
                          buttonNameInc={'Inc'}
                          buttonNameReset={'Reset'}
                          callbackInc={inc}
@@ -99,15 +95,13 @@ function App() {
                          incDisabled={incDisabled}
                          resetDisabled={Disabled}
                          isTouched={isTouched}
-
                 />
                 <Settings nameMax={'max value'}
                           nameStart={'start value'}
                           setStartValue={startValueHandler}
                           setMaxValue={maxValueHandler}
                           maxValue={maxValue}
-                          counter={setCounter}
-                          // counter={ dispatchCounter}
+                          counter={counter}
                           startValue={startValue}
                           buttonName={'Set'}
                           callback={setNewCounter}
@@ -118,4 +112,4 @@ function App() {
     );
 }
 
-export default App;
+export default AppWithRedux;

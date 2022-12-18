@@ -16,30 +16,30 @@ type SettingsType = {
     incDisabled: boolean
     maxValue: number
     startValue: number
-    counter: (value: any) => void
+    counter: (value: number ) => void
 }
 
 export function Settings(props: SettingsType) {
 
-    return  <div className={style.mainBlock}>
-        <div className={style.settings} >
-        <Input name={props.nameMax}
-               setValue={props.setMaxValue}
-               value={props.maxValue}
-               counter={props.counter}
-               disabled={props.disabled}
+    return <div className={style.mainBlock}>
+        <div className={style.settings}>
+            <Input name={props.nameMax}
+                   setValue={props.setMaxValue}
+                   value={props.maxValue}
+                   counter={props.counter}
+                   disabled={props.disabled}
 
-        />
-        <Input name={props.nameStart}
-               setValue={props.setStartValue}
-               disabled={  props.disabled }
-               value={props.startValue}
-               counter={props.counter}
-        />
-<div className={style.buttonsBlockSettings}>
-            <Buttons name={'Set'} callback={props.callback} disabled={props.disabled}/>
-</div>
+            />
+            <Input name={props.nameStart}
+                   setValue={props.setStartValue}
+                   disabled={props.disabled}
+                   value={props.startValue}
+                   counter={props.counter}
+            />
+            <div className={style.buttonsBlockSettings}>
+                <Buttons name={'Set'} callback={props.callback} disabled={props.disabled}/>
+            </div>
         </div>
-</div>
+    </div>
 }
 
