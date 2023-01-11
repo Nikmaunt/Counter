@@ -88,31 +88,31 @@ function App() {
     return (
         <div className={style.counterBlock}>
             <div className={style.main}>
-                <Counter maxValue={maxValue}
-                         startValue={startValue}
-                         counter={counter}
-                    // counter={isTouched ? 'text' : counter}
-                         buttonNameInc={'Inc'}
-                         buttonNameReset={'Reset'}
-                         callbackInc={inc}
-                         callbackReset={reset}
-                         incDisabled={incDisabled}
-                         resetDisabled={Disabled}
-                         isTouched={isTouched}
+                {/*<Counter maxValue={maxValue}*/}
+                {/*         startValue={startValue}*/}
+                {/*         counter={counter}*/}
+                {/*    // counter={isTouched ? 'text' : counter}*/}
+                {/*         buttonNameInc={'Inc'}*/}
+                {/*         buttonNameReset={'Reset'}*/}
+                {/*         callbackInc={inc}*/}
+                {/*         callbackReset={reset}*/}
+                {/*         incDisabled={incDisabled}*/}
+                {/*         resetDisabled={Disabled}*/}
+                {/*         isTouched={isTouched}*/}
 
-                />
-                <Settings nameMax={'max value'}
-                          nameStart={'start value'}
-                          setStartValue={startValueHandler}
-                          setMaxValue={maxValueHandler}
-                          maxValue={maxValue}
-                          counter={setCounter}
-                          // counter={ dispatchCounter}
-                          startValue={startValue}
-                          buttonName={'Set'}
-                          callback={setNewCounter}
-                          disabled={Disabled}
-                          incDisabled={incDisabled}/>
+                {/*/>*/}
+                {/*<Settings nameMax={'max value'}*/}
+                {/*          nameStart={'start value'}*/}
+                {/*          setStartValue={startValueHandler}*/}
+                {/*          setMaxValue={maxValueHandler}*/}
+                {/*          maxValue={maxValue}*/}
+                {/*          counter={setCounter}*/}
+                {/*          // counter={ dispatchCounter}*/}
+                {/*          startValue={startValue}*/}
+                {/*          buttonName={'Set'}*/}
+                {/*          callback={setNewCounter}*/}
+                {/*          disabled={Disabled}*/}
+                {/*          incDisabled={incDisabled}/>*/}
             </div>
         </div>
     );

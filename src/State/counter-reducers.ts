@@ -1,7 +1,8 @@
+import {Dispatch} from "redux";
+import {AppRootStateType} from "./Store/Store";
 
 
-
-type ActionsType = IncActionType | ResetActionType | StartValueActionType | MaxValueActionType | AddValueActionType|SetNewCounterActionType
+export type ActionsType = IncActionType | ResetActionType | StartValueActionType | MaxValueActionType | AddValueActionType|SetNewCounterActionType | SetCounterFromLocalStorageActionType
 
 export type InitialStateType = {
     counter: number
@@ -17,7 +18,7 @@ const initialState = {
     isTouched: false
 }
 
-export const counterReducer = (state: InitialStateType = initialState , action: ActionsType) => {
+export const counterReducer = (state: InitialStateType = initialState , action: ActionsType):InitialStateType => {
     switch (action.type) {
         case'INC': {
             const stateCopy = state
@@ -49,9 +50,27 @@ export const counterReducer = (state: InitialStateType = initialState , action: 
             }
             return {...stateCopy}
         }
+        case 'SET-COUNTER-FROM-LOCAL-STORAGE': {
+            return {...state, counter:action.counter}
+        }
         default: return state
     }
 }
+
+export const incTC = () => (dispatch:Dispatch, getState:()=>AppRootStateType) => {
+   let currentCounter =  getState().counter.counter
+    localStorage.setItem('counterValue', JSON.stringify(currentCounter+1))
+     dispatch(incAC())
+}
+export const setCounterValueFromLocalStorageTC = () => (dispatch:Dispatch) => {
+    let counterAsString = localStorage.getItem(`counterValue`)
+        if (counterAsString) {
+            let newCounter = JSON.parse(counterAsString)
+           dispatch(setCounterFromLocalStorageAC(newCounter))
+        }
+}
+
+
 
 
 export type IncActionType = {
@@ -80,6 +99,14 @@ export type SetNewCounterActionType = {
 export const incAC = () :IncActionType => ({
     type: 'INC',
 })
+
+export type SetCounterFromLocalStorageActionType = ReturnType<typeof setCounterFromLocalStorageAC>
+
+export const setCounterFromLocalStorageAC = (counter:number) => (
+    {
+        type: "SET-COUNTER-FROM-LOCAL-STORAGE", counter
+    } as const
+)
 
 export const resetAC = () => {
     return { type: 'RESET'}

@@ -22,7 +22,7 @@ export type InputType = {
     name: string
     setValue: (value: number) => void
     value: number
-    counter: (value: any) => void
+    counter: number
     disabled: boolean
 }
 

@@ -5,9 +5,9 @@ import {Settings} from "./Components/Settings";
 import style from "../src/Components/counter.module.css";
 import {
     addValueAC,
-    incAC, InitialStateType,
+    incAC, incTC, InitialStateType,
     maxValueAC,
-    resetAC,
+    resetAC, setCounterValueFromLocalStorageTC,
     setNewCounterAC, startValueAC
 } from "./State/counter-reducers";
 import {useDispatch, useSelector} from "react-redux";
@@ -16,19 +16,18 @@ import {AppRootStateType} from "./State/Store/Store";
 
 function AppWithRedux() {
     let counter = useSelector<AppRootStateType, any>(state => state.counter.counter)
-    let maxValue = useSelector<AppRootStateType, number>(state => state.counter.maxValue)
-    let startValue = useSelector<AppRootStateType, number>(state => state.counter.startValue)
-    let isTouched = useSelector<AppRootStateType, boolean>(state => state.counter.isTouched)
+    let maxValue =useSelector<AppRootStateType, any>(state => state.counter.maxValue)
+    let startValue = useSelector<AppRootStateType, any>(state => state.counter.startValue)
+    let isTouched =useSelector<AppRootStateType, any>(state => state.counter.isTouched)
     const dispatch = useDispatch()
+
 
     const startValueHandler = (value: number) => {
         dispatch(startValueAC(value))
     }
-
     const maxValueHandler = (value: number) => {
         dispatch(maxValueAC(value))
     }
-
     let isDisabled = true
     // useEffect(() => {
     //     let counterAsString = localStorage.getItem(`counterValue`)
@@ -62,7 +61,6 @@ function AppWithRedux() {
     function inc() {
         dispatch(incAC())
     }
-
     function reset() {
         dispatch(resetAC())
     }

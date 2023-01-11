@@ -16,7 +16,7 @@ type SettingsType = {
     incDisabled: boolean
     maxValue: number
     startValue: number
-    counter: (value: number ) => void
+    counter: number
 }
 
 export function Settings(props: SettingsType) {
